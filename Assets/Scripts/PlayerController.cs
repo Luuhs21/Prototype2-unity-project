@@ -11,17 +11,21 @@ public class PlayerController : MonoBehaviour
     //player speed of movement
     public float speed = 10.0f;
     public float xRange = 10.0f;
+    public GameObject projectilePrefab;
+    public InputAction fireAction;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         moveAction.Enable();
+        fireAction.Enable();
     }
 
     // Update is called once per frame
     void Update()
     {
         playerMoveLeftRight();
+        fireSteak();
     }
 
     //methods
@@ -43,5 +47,13 @@ public class PlayerController : MonoBehaviour
             transform.position = new Vector3(xRange, transform.position.y, transform.position.z);
         }
 
+    }
+
+    public void fireSteak()
+    {
+        if (fireAction.triggered)
+        {
+           Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
+        }
     }
 }
